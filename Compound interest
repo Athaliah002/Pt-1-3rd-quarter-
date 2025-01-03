@@ -1,0 +1,49 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.Math;
+
+public class CompoundInterestProgram {
+    public static void main(String[] args) throws IOException {
+        // Create a CompoundInterestCalculator object
+        CompoundInterestCalculator calculator = new CompoundInterestCalculator();
+        calculator.collectData(); // Collect data from the user
+        calculator.calculateInterest(); // Perform compound interest calculation
+        calculator.displayResult(); // Display the result
+    }
+}
+
+class CompoundInterestCalculator {
+    private double principal;
+    private double rate;
+    private int timeCompounded;
+    private int years;
+    private double amount;
+
+    // Method to collect input data from the user
+    public void collectData() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        System.out.print("Enter the principal amount: ");
+        principal = Double.parseDouble(reader.readLine());
+
+        System.out.print("Enter the interest rate (in %): ");
+        rate = Double.parseDouble(reader.readLine()) / 100;
+
+        System.out.print("Enter the number of times compounded per year: ");
+        timeCompounded = Integer.parseInt(reader.readLine());
+
+        System.out.print("Enter the number of years: ");
+        years = Integer.parseInt(reader.readLine());
+    }
+
+    // Method to calculate the compound interest
+    public void calculateInterest() {
+        amount = principal * Math.pow(1 + (rate / timeCompounded), timeCompounded * years);
+    }
+
+    // Method to display the result
+    public void displayResult() {
+        System.out.printf("The amount after %d years is: %.2f%n", years, amount);
+    }
+}
