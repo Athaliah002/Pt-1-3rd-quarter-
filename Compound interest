@@ -1,4 +1,6 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.Math;
@@ -10,6 +12,7 @@ public class CompoundInterestProgram {
         calculator.collectData(); // Collect data from the user
         calculator.calculateInterest(); // Perform compound interest calculation
         calculator.displayResult(); // Display the result
+        calculator.saveToHistory(); // Save the output to a text file
     }
 }
 
@@ -45,5 +48,18 @@ class CompoundInterestCalculator {
     // Method to display the result
     public void displayResult() {
         System.out.printf("The amount after %d years is: %.2f%n", years, amount);
+    }
+
+    // Method to save the result to a history file
+    public void saveToHistory() {
+        String history = String.format("Principal: %.2f, Rate: %.2f%%, Compounded: %d times/year, Years: %d, Amount: %.2f%n",
+                principal, rate * 100, timeCompounded, years, amount);
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("CompoundInterestHistory.txt", true))) {
+            writer.write(history);
+            System.out.println("Output saved to history.");
+        } catch (IOException e) {
+            System.err.println("Error saving to history file: " + e.getMessage());
+        }
     }
 }
