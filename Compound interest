@@ -57,8 +57,8 @@ class CompoundInterestCalculator {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("CompoundInterestHistory.txt", true))) {
             writer.write(history);
-            System.out.println("Output saved to history.");
-        } catch (IOException e) {
+            System.out.println("File saved to history.");
+        } catch (IOException e) { // will catch a error if the user made a wrong type
             System.err.println("Error saving to history file: " + e.getMessage());
         }
     }
